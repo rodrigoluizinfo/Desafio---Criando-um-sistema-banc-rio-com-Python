@@ -94,7 +94,7 @@ while True:
           if saldo > 0:
             valor_saque = float(input("Digite o valor para sacar: "))
           
-            if valor_saque < saldo:
+            if valor_saque <= saldo:
               
               if valor_saque <= limite:
                 
@@ -108,7 +108,7 @@ while True:
             else:
               print("Valor do saque acima do saldo disponível!")
           
-            if numero_saques >= 3:
+            if numero_saques >= LIMITE_SAQUES:
               print("Limite de saques atingido!")
           else:
             print("Nenhum depósito realizado!")
@@ -137,6 +137,4 @@ while True:
     break
 
   else:
-      print("Operação inválida, por favor selecione novamente a operação desejada.")    
-    
-
+      print("Operação inválida, por favor selecione novamente a operação desejada.")
