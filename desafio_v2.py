@@ -89,24 +89,6 @@ def menu():
     => """
     return input(textwrap.dedent(menu))
 
-########### Funções
-
-import textwrap
-
-########### Menu
-def menu():
-    menu = """\n
-    ================ MENU ================
-    [d]\tDepositar
-    [s]\tSacar
-    [e]\tExtrato
-    [nc]\tNova conta
-    [lc]\tListar contas
-    [nu]\tNovo usuário
-    [q]\tSair
-    => """
-    return input(textwrap.dedent(menu))
-
 def depositar(saldo, valor, extrato):
     # Verifica se o valor a ser depositado é positivo
     if valor > 0:
