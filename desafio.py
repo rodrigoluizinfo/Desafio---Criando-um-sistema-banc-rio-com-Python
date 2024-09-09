@@ -1,4 +1,4 @@
-# DESAFIO - CRIANDO UM SISTEMA BANCÁRIO COM PYTHON
+############ DESAFIO - CRIANDO UM SISTEMA BANCÁRIO COM PYTHON (VERSÃO 1.0) ###########
 
 # Fomos contratos por um grande banco para desenvolver o seu novo sistema. 
 # Esse banco deseja monetizar suas operações e para isso escolheu a linguagem Python
@@ -21,7 +21,7 @@
 # Essa operação deve listar todos os depósitos e saques realizados na conta. No fim da listagem deve ser exibido o saldo atual da conta.
 # Os valores devem ser exibidos utilizando o formato R$ xxx.xx, exemplo: 1500,45 = R$ 1500.45
 
-# SOLUÇÃO
+########## SOLUÇÃO ##########
 
 #Criando o menu
 
@@ -111,7 +111,7 @@ while True:
             if numero_saques >= LIMITE_SAQUES:
               print("Limite de saques atingido!")
           else:
-            print("Nenhum depósito realizado!")
+            print("Saldo indisponível. Por favor, faça um depósito para ser possível realizar um saque!")
             break
                   
         elif opcao_saque == "q":
@@ -130,7 +130,7 @@ while True:
     if extrato == "":
       print("Nenhuma movimentação realizada!")
     else:
-      print(f"\n********* EXTRATO ********* \n\n{extrato}Saldo atual: R$ {saldo:.2f}\n")
+      print(f"\n********* EXTRATO ********* \n\n{extrato}\n\n\n\nSaldo atual: R$ {saldo:.2f}\n****************************")
     
   elif opcao == "q":
     print("Saindo do sistema")
