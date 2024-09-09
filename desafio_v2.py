@@ -89,7 +89,7 @@ def menu():
     => """
     return input(textwrap.dedent(menu))
 
-def depositar(saldo, valor, extrato):
+def depositar(saldo, valor, extrato, /): # Positional Only
     # Verifica se o valor a ser depositado é positivo
     if valor > 0:
         saldo += valor  # Atualiza o saldo com o valor do depósito
@@ -99,7 +99,7 @@ def depositar(saldo, valor, extrato):
         print("Não é aceito valores negativos. Por favor, insira somente valores positivos!")
     return saldo, extrato 
 
-def sacar(saldo, valor, extrato, limite, numero_saques, limite_saques):
+def sacar(*, saldo, valor, extrato, limite, numero_saques, limite_saques): # Keyword Only
     # Verifica se o saque excede o saldo, o limite por transação ou o limite de saques diários
     excedeu_saldo  = valor > saldo
     excedeu_limite = valor > limite
@@ -118,7 +118,7 @@ def sacar(saldo, valor, extrato, limite, numero_saques, limite_saques):
         print("Saque realizado com sucesso!")
     return saldo, extrato, numero_saques
 
-def exibir_extrato(saldo, extrato):
+def exibir_extrato(saldo, /, *, extrato): # Postional Only (/) - saldo e Keyword Only (*) - extrato 
     # Exibe o extrato com todas as transações e o saldo atual
     if not extrato:
         print("Nenhuma movimentação realizada!")
@@ -173,8 +173,8 @@ def listar_contas(contas):
         linha = f"""\
         # Agência:\t{conta['Agência']}
         # C/C:\t\t{conta['Número_Conta']}
-        # Titular:\t{conta['Usuário']['Nome']} # Poderia colocar o CPF para ficar visível que o registro é unico para cada conta criada
-        """
+        # Titular:\t{conta['Usuário']['Nome']} 
+        """ # Poderia colocar o CPF para ficar visível que o registro é unico para cada conta criada
         print("#" * 50)
         print(textwrap.dedent(linha))
 
