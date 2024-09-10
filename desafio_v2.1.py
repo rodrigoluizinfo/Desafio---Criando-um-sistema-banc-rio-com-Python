@@ -208,14 +208,14 @@ def main():
         elif opcao == "s":
             valor_saque = float(input("Digite o valor para sacar: "))
             saldo, extrato, numero_transacoes = sacar(
-                saldo, 
-                valor_saque, 
-                extrato, 
-                limite, 
+                saldo=saldo, 
+                valor=valor_saque, 
+                extrato=extrato,
+                limite=limite,
                 numero_transacoes=numero_transacoes, 
-                limite_saques=LIMITE_TRANSACOES) #Rebendo os retornos da função
+                limite_transacoes=LIMITE_TRANSACOES) #Rebendo os retornos da função
         elif opcao == "e":
-            exibir_extrato(saldo, extrato)
+            exibir_extrato(saldo, extrato=extrato)
         elif opcao == "nu":
             criar_usuario(usuarios)
         elif opcao == "nc":
