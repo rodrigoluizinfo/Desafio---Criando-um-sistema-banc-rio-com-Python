@@ -1,4 +1,4 @@
-# ########### DESAFIO - CRIANDO UM SISTEMA BANCÁRIO COM PYTHON (VERSÃO 2.0) ###########
+# ########### DESAFIO - CRIANDO UM SISTEMA BANCÁRIO COM PYTHON (VERSÃO 2.1) ###########
 
 # # Fomos contratos por um grande banco para desenvolver o seu novo sistema. 
 # # Esse banco deseja monetizar suas operações e para isso escolheu a linguagem Python
@@ -20,7 +20,7 @@
 
 # # 2 - OPERAÇÃO DE SAQUE -- LÓGICA
 
-# # O sistema deve permitir realizar 3 saques diários com limite máximo de R$ 500,00 por saque.
+# # O sistema deve permitir realizar 10 movimentações diárias para uma conta com limite máximo de R$ 500,00 por saque.
 # # Caso o usuário não tenha saldo em conta, o sistema deve exibir uma mensagem informando que não será possível sacar o dinheiro por falta de saldo.
 # # Todos os saques devem ser armazenados em uma variável e exibidos na operação de extrato.
 
@@ -41,9 +41,11 @@
 
 # # A FUNÇÃO EXTRATO DEVE RECEBER OS ARGUMENTOS POR POSIÇÃO E NOME (POSITIONAL ONLY E KEYWORD ONLY).
 
-# #   ARGUMENTO POSICIONAIS: SALDO ARGUMENTOS 
+# #   ARGUMENTO POSICIONAIS: SALDO 
   
 # #   NOMEADOS: EXTRATO.
+
+# #   DEVERÁ MOSTRAR DATA E HORA DE TODAS AS TRANSAÇÕES (OU SEJA, DEVERÁ REGISTRAR DATA E HORA DE TODAS AS TRANSAÇÕES, SEJA DE DEPÓSITO OU SAQUE).
 
 # # 4 - CRIAR USUÁRIO -- FUNÇÃO
 
@@ -99,24 +101,24 @@ def depositar(saldo, valor, extrato, /): # Positional Only
         print("Não é aceito valores negativos. Por favor, insira somente valores positivos!")
     return saldo, extrato 
 
-def sacar(*, saldo, valor, extrato, limite, numero_saques, limite_saques): # Keyword Only
+def sacar(*, saldo, valor, extrato, limite, numero_transacoes, limite_transacoes): # Keyword Only
     # Verifica se o saque excede o saldo, o limite por transação ou o limite de saques diários
     excedeu_saldo  = valor > saldo
     excedeu_limite = valor > limite
-    excedeu_saques = numero_saques >= limite_saques
+    excedeu_movimentacoes = numero_transacoes >= limite_transacoes
 
     if excedeu_saldo:
         print("Saldo indisponível!")
     elif excedeu_limite:
         print(f"Saque acima do valor limite de R$ {limite:.2f}!")
-    elif excedeu_saques:
-        print("Limite de saques atingido!")
+    elif excedeu_movimentacoes:
+        print("Limite de movimentações atingido!")
     else:
         saldo -= valor  # Atualiza o saldo após o saque
-        numero_saques += 1  # Incrementa o contador de saques
+        numero_transacoes += 1  # Incrementa o contador de movimentações
         extrato += f"Saque: R$ {valor:.2f}\n"  # Adiciona a transação ao extrato
         print("Saque realizado com sucesso!")
-    return saldo, extrato, numero_saques
+    return saldo, extrato, numero_transacoes
 
 def exibir_extrato(saldo, /, *, extrato): # Postional Only (/) - saldo e Keyword Only (*) - extrato 
     # Exibe o extrato com todas as transações e o saldo atual
@@ -187,11 +189,11 @@ def main():
     saldo = 0
     limite = 500.00
     extrato = ""
-    numero_saques = 0
+    numero_transacoes = 0
     numero_conta = 0  # Inicializando o número da conta
 
     # Variáveis constantes
-    LIMITE_SAQUES = 3
+    LIMITE_TRANSACOES = 10
     AGENCIA = "0001"
 
     # Listas
@@ -205,15 +207,15 @@ def main():
             saldo, extrato = depositar(saldo, valor_deposito, extrato)
         elif opcao == "s":
             valor_saque = float(input("Digite o valor para sacar: "))
-            saldo, extrato, numero_saques = sacar(
-                saldo=saldo, 
-                valor=valor_saque, 
-                extrato=extrato, 
-                limite=limite, 
-                numero_saques=numero_saques, 
-                limite_saques=LIMITE_SAQUES)
+            saldo, extrato, numero_transacoes = sacar(
+                saldo, 
+                valor_saque, 
+                extrato, 
+                limite, 
+                numero_transacoes=numero_transacoes, 
+                limite_saques=LIMITE_TRANSACOES) #Rebendo os retornos da função
         elif opcao == "e":
-            exibir_extrato(saldo, extrato=extrato)
+            exibir_extrato(saldo, extrato)
         elif opcao == "nu":
             criar_usuario(usuarios)
         elif opcao == "nc":
